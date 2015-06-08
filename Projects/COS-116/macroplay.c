@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define ECHO(string) (printf("%s",string));
+#define ECHO(string) (printf("\n%s\n",string));
 
 int main ()
 {

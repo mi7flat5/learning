@@ -2,45 +2,28 @@
 #define LSIZE 81
 #include<stdlib.h>
 #include<string.h>
+
 void getline(char []);
+FILE *FileOpen(char[LSIZE]);
+int FileValidate(FILE*);
+void FileWrite(FILE*);
+void FileDisp(FILE*);
+
 int main()
 {
-int i=0,j=0;
 FILE *fileadd;
-char filecontent[512];
-char userline[512];
-char loopend='\n';
-//char check[]='\n';
-fileadd = fopen("txtdataforprgm.sth","a");
-while (j<5)
-{
-printf("\nenter 5 lines: ");
+char userfile[LSIZE];
 
-gets(userline);
+fileadd = FileOpen(userfile);
 
-fputs(userline,fileadd);
-fputs(&loopend,fileadd);
-fflush(stdin);
-++j;
-}
+    if (FileValidate(fileadd)>0)
+        {return 0;}
 
-fclose(fileadd);
-fileadd = fopen("txtdataforprgm.sth","r");
 
-if (fileadd ==NULL)
-    {printf("\nFailed to load file.");
-    exit(1);}
-rewind(fileadd);
+    FileWrite(&userfile);
+     printf("\n");
+    FileDisp(&userfile);
 
-char somechar;
-printf("\n");
-while(fgets(filecontent,512,fileadd))
-    {++i;
-    printf("%d %s",i,filecontent);
-    //filecontent[i]=&somechar;
-    }
-
-fclose(fileadd);
 
 return 0;
 }
@@ -57,6 +40,65 @@ it to an array of characters that is passed to it by the calling function*/
         fflush(stdin); //I added this because I was getting extra newline characters causeing unpredictable or eratic behavior
 
         uservalid[i]='\0';
+
+return;
+}
+int FileValidate(FILE *userfile)
+{
+
+    if (userfile ==NULL)
+    {printf("\nFile not found.\n");
+      return 1;}
+
+   fclose(userfile);
+
+return 0;
+}
+void FileWrite(FILE *userfile)
+{
+   int i=1;
+   int j =0;
+   char loopend ='\n';
+   char userline[LSIZE];
+    FILE *Fileadd;
+   Fileadd = fopen(userfile,"w");
+       while (j<5)
+    {
+    printf("\nEnter 5 lines, line #%d: ",i++);
+
+    getline(userline);
+
+    fputs(&userline,Fileadd);
+    fputc(loopend,Fileadd);
+    fflush(stdin);
+    ++j;
+    }
+    fclose(Fileadd);
+return;
+}
+FILE *FileOpen(char userfile[])
+{
+
+  FILE *Fileadd;
+
+    printf("\nPlease enter the file name you wish to process: ");
+        getline(userfile);
+        Fileadd = fopen(userfile,"r");
+
+  fclose(Fileadd);
+
+return Fileadd;
+}
+void FileDisp(FILE *filename)
+{
+    FILE *Fileadd = fopen(filename, "r");
+    int c;
+
+        while ((c = fgetc(Fileadd)) != EOF)     // read character from file until EOF
+        {
+            putchar(c);
+        }
+        fclose(Fileadd);
 
 return;
 }
