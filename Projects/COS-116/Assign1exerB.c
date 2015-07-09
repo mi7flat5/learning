@@ -1,10 +1,10 @@
 #include <stdio.h>
 
-double alpha = 123.45;
-double beta = 98.76;
-double gamma = 76.67;
-double total = 0;
-double average = 0;
+double alpha = 123.45f;
+float beta = 98.76f;
+float gamma = 76.67f;
+float total = 0;
+float average = 0;
 
     int main (void)
     {
@@ -12,9 +12,9 @@ double average = 0;
         total = alpha+beta+gamma ;
         average = total/3.0;
 
-            printf("\nalpha is: %.2lf beta is: %.2lf gamma is: %.2lf",alpha,beta,gamma);
-            printf("\nTheir total is: %.2lf", total);
-            printf("\nTheir average is: %.2lf\a", average);
+            printf("\nalpha is: %f beta is: %f gamma is: %lf",alpha,beta,gamma);
+            printf("\nTheir total is: %lf", total);
+            printf("\nTheir average is: %lf\a", average);
 
         return 0;
         }
