@@ -1,7 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <boost/rational.hpp>
+#include<iostream>
+#include<string>
+#include<sstream>
 using boost::rational;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
