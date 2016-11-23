@@ -9,7 +9,7 @@
 class Date {
     int day,month,year;
     bool leap_year(int)const;
-    std::string timeItIs();
+    void time();
 public:
     Date();
     explicit Date(int,int,int);

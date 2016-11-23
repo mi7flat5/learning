@@ -1,6 +1,7 @@
 //
 // Created by shane on 7/27/15.
 //
+#define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 #include "Date.h"
 #include <chrono>  // chrono::system_clock
@@ -8,7 +9,10 @@
 #include <sstream> // stringstream
 #include <iomanip> // put_time
 #include <string>
-Date::Date():day(1),month(1),year(1901){}
+Date::Date()
+{
+	time();
+}
 
 Date::Date(int d, int m, int y) {
     if (d > 0 && d < 32 && (m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12) &&
@@ -33,10 +37,8 @@ Date::Date(int d, int m, int y) {
         year = y;
     }
     else {
-        std::cout << "invalid date." << '\n';
-        day = 1;
-        month = 1;
-        year = 1900;
+        std::cout << "Invalid date, set to current date." << '\n';
+		time();
     }
 
 }
@@ -64,10 +66,8 @@ Date::Date(int d, int m) {
         year = y;
     }
     else {
-        std::cout << "invalid date." << '\n';
-        day =1;
-        month = 1;
-        year = 1900;
+        std::cout << "Invalid date, set to current date." << '\n';
+		time();
     }
 }
 void Date::print_numDate() const {
@@ -86,12 +86,14 @@ bool Date::leap_year(int y)const
     else
         return false;
 }
-std::string timeItIs()
+void  Date::time()
 {
-    auto now = std::chrono::system_clock::now();
-    auto in_time_t = std::chrono::system_clock::to_time_t(now);
-
+	std::time_t t = std::time(nullptr);
     std::stringstream ss;
-    ss << std::put_time(std::localtime(&in_time_t), "%D");
-    return ss.str() ;
+    ss << std::put_time(std::localtime(&t), "%Y");
+    ss << year;
+	ss << std::put_time(std::localtime(&t), "%m");
+	ss << month;
+	ss << std::put_time(std::localtime(&t), "%d");
+	ss << day;
 }
